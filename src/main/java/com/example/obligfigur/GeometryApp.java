@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class GeometryApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         BorderPane borderPane = new BorderPane();
