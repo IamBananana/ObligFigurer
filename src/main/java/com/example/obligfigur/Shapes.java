@@ -3,12 +3,12 @@ import java.awt.*;
 
 public class Shapes {
     protected int x, y;
-    protected Color farge;
+    protected Color color;
 
-    public Shapes(int x, int y, Color farge) {
+    public Shapes(int x, int y, Color color) {
         setX(x);
         setY(y);
-        setFarge(farge);
+        setColor(color);
     }
     public Shapes(int x, int y) {
         setX(x);
@@ -21,8 +21,8 @@ public class Shapes {
     public void setY (int y){
         this.y = y;
     }
-    public void setFarge (Color farge){
-        this.farge = farge;
+    public void setColor(Color color){
+        this.color = color;
     }
     public int getX (){
         return x;
@@ -30,8 +30,8 @@ public class Shapes {
     public int getY (){
         return y;
     }
-    public Color getFarge (){
-        return farge;
+    public Color getColor(){
+        return color;
     }
     @Override
     public String toString (){
