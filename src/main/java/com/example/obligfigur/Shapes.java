@@ -1,16 +1,16 @@
 package com.example.obligfigur;
 import java.awt.*;
 
-public class Figur {
+public class Shapes {
     protected int x, y;
     protected Color farge;
 
-    public Figur (int x, int y, Color farge) {
+    public Shapes(int x, int y, Color farge) {
         this.x = x;
         this.y = y;
         this.farge = farge;
     }
-    public Figur (int x, int y) {
+    public Shapes(int x, int y) {
         this.x = x;
         this.y = y;
     }

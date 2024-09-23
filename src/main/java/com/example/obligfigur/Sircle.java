@@ -1,13 +1,13 @@
 package com.example.obligfigur;
 import java.awt.*;
 
-public class Sirkel extends Figur {
+public class Sircle extends Shapes {
     protected float radius;
-    public Sirkel(int x, int y, float radius, Color color) {
+    public Sircle(int x, int y, float radius, Color color) {
         super(x, y, color);
         setRadius(radius);
     }
-    public Sirkel(int x, int y, float radius) {
+    public Sircle(int x, int y, float radius) {
         super(x, y);
         setRadius(radius);
     }

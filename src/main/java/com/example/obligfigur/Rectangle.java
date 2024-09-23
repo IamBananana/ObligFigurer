@@ -1,14 +1,14 @@
 package com.example.obligfigur;
 import java.awt.*;
 
-public class Rektangel extends Figur{
+public class Rectangle extends Shapes {
     protected float høyde, bredde;
-    public Rektangel(int x, int y, float høyde, float bredde, Color color){
+    public Rectangle(int x, int y, float høyde, float bredde, Color color){
         super(x, y, color);
         setHøyde(høyde);
         setBredde(bredde);
     }
-    public Rektangel(int x, int y, float høyde, float bredde){
+    public Rectangle(int x, int y, float høyde, float bredde){
         super(x, y);
         setHøyde(høyde);
         setBredde(bredde);
