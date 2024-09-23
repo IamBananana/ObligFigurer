@@ -3,7 +3,6 @@ package application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -52,13 +51,17 @@ public class SceneHandler{
 
         vBucks.getChildren().addAll(line, arc, polyline, rectangle, circle, ellipse, polygon);
 
-        bp.setLeft(vBucks);
-
         drawerPane = new Pane();
+        drawerPane.setStyle("-fx-background-color: #ffffff;");
+
+
+        bp.setLeft(vBucks);
+        bp.setCenter(drawerPane);
+
         drawerPane.setPrefWidth(scene.getWidth() * 3 / 4);
 
-        //Right side
 
+        new MouseEventHandler(drawerPane);
 
     }
 
