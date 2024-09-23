@@ -3,6 +3,8 @@ package application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -23,9 +25,9 @@ public class SceneHandler{
 
         VBox vBucks = new VBox(10);
         vBucks.setPrefWidth(scene.getWidth() / 5);
-        vBucks.setAlignment(Pos.CENTER_LEFT);
+        vBucks.setAlignment(Pos.TOP_LEFT);
         vBucks.setStyle("-fx-background-color: #cccccc; -fx-padding: 10px;");
-
+        ToggleGroup tg = new ToggleGroup();
         //Line types
         RadioButton line = new RadioButton("Line");
         RadioButton arc = new RadioButton("Arc");
@@ -37,8 +39,18 @@ public class SceneHandler{
         RadioButton circle = new RadioButton("Circle");
         RadioButton ellipse = new RadioButton("Ellipse");
         RadioButton polygon = new RadioButton("Polygon");
-        vBucks.getChildren().addAll(line, arc, polyline, rectangle, circle, ellipse, polygon);
+        line.setToggleGroup(tg);
+        arc.setToggleGroup(tg);
+        polyline.setToggleGroup(tg);
+        rectangle.setToggleGroup(tg);
+        circle.setToggleGroup(tg);
+        ellipse.setToggleGroup(tg);
+        polygon.setToggleGroup(tg);
 
+        //For laterrr
+        // RadioButton radioButton = (RadioButton) tg.getSelectedToggle();
+
+        vBucks.getChildren().addAll(line, arc, polyline, rectangle, circle, ellipse, polygon);
 
         bp.setLeft(vBucks);
 
