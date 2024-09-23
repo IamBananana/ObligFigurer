@@ -6,13 +6,13 @@ public class Shapes {
     protected Color farge;
 
     public Shapes(int x, int y, Color farge) {
-        this.x = x;
-        this.y = y;
-        this.farge = farge;
+        setX(x);
+        setY(y);
+        setFarge(farge);
     }
     public Shapes(int x, int y) {
-        this.x = x;
-        this.y = y;
+        setX(x);
+        setY(y);
     }
 
     public void setX (int x){
