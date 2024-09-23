@@ -4,6 +4,6 @@ module com.example.obligfigur {
     requires java.desktop;
 
 
-    opens com.example.obligfigur to javafx.fxml;
-    exports com.example.obligfigur;
+    opens application to javafx.fxml;
+    exports application;
 }

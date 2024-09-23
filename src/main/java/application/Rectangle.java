@@ -1,26 +1,26 @@
-package com.example.obligfigur;
+package application;
 import java.awt.*;
 
 public class Rectangle extends Shapes {
     protected float height, width;
-    public Rectangle(int x, int y, float høyde, float width, Color color){
+    public Rectangle(int x, int y, float setHeight, float width, Color color){
         super(x, y, color);
-        setHøyde(høyde);
+        setHeight(setHeight);
         setWidth(width);
     }
     public Rectangle(int x, int y, float height, float bredde){
         super(x, y);
-        setHøyde(height);
+        setHeight(height);
         setWidth(bredde);
     }
 
-    public void setHøyde(float height) {
+    public void setHeight(float height) {
         this.height = height;
     }
     public void setWidth(float width) {
         this.width = width;
     }
-    public float getHøyde() {
+    public float getHeight() {
         return height;
     }
     public float getWidth() {

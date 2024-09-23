@@ -1,4 +1,4 @@
-package com.example.obligfigur;
+package application;
 import java.awt.*;
 
 public class Circle extends Shapes {
