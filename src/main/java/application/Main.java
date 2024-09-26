@@ -16,7 +16,7 @@ public class Main extends Application {
         BorderPane root = new BorderPane();
         Scene scene = new Scene(root, screenWidth * 0.8, screenHeight * 0.8);
 
-        // Initialize SceneHandler with the scene
+
         SceneHandler sceneHandler = new SceneHandler(scene);
 
         stage.setTitle("Geometry Application with Mouse Listeners");
