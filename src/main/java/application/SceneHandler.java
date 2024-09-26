@@ -1,12 +1,17 @@
 package application;
 
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
+import  javafx.scene.paint.Color;
+
+import java.awt.*;
 
 public class SceneHandler{
     private Scene scene;
@@ -20,21 +25,22 @@ public class SceneHandler{
 
     private void intialize(){
         BorderPane bp = (BorderPane) scene.getRoot();
-        //Left side
-
-
 
         drawerPane = new Pane();
         drawerPane.setStyle("-fx-background-color: #ffffff;");
-
 
         bp.setLeft(getVBucks());
         bp.setCenter(drawerPane);
 
         drawerPane.setPrefWidth(scene.getWidth() * 3 / 4);
 
-
         new MouseEventHandler(drawerPane);
+        Shapes[] shapes = new Shapes[10];
+        shapes[0] = new myCircle(20, 30, 50, Color.RED);
+        shapes[1] = new myRectangle(50, 50, 100, 50, Color.BLUE);
+        drawerPane.getChildren().add((Node) shapes[0]);
+        drawerPane.getChildren().add((Node) shapes[1]);
+
 
     }
     private VBox getVBucks(){
