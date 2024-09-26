@@ -22,6 +22,22 @@ public class SceneHandler{
         BorderPane bp = (BorderPane) scene.getRoot();
         //Left side
 
+
+
+        drawerPane = new Pane();
+        drawerPane.setStyle("-fx-background-color: #ffffff;");
+
+
+        bp.setLeft(getVBucks());
+        bp.setCenter(drawerPane);
+
+        drawerPane.setPrefWidth(scene.getWidth() * 3 / 4);
+
+
+        new MouseEventHandler(drawerPane);
+
+    }
+    private VBox getVBucks(){
         VBox vBucks = new VBox(10);
         vBucks.setPrefWidth(scene.getWidth() / 5);
         vBucks.setAlignment(Pos.TOP_LEFT);
@@ -45,24 +61,10 @@ public class SceneHandler{
         circle.setToggleGroup(tg);
         ellipse.setToggleGroup(tg);
         polygon.setToggleGroup(tg);
-
         //For laterrr
         // RadioButton radioButton = (RadioButton) tg.getSelectedToggle();
-
         vBucks.getChildren().addAll(line, arc, polyline, rectangle, circle, ellipse, polygon);
 
-        drawerPane = new Pane();
-        drawerPane.setStyle("-fx-background-color: #ffffff;");
-
-
-        bp.setLeft(vBucks);
-        bp.setCenter(drawerPane);
-
-        drawerPane.setPrefWidth(scene.getWidth() * 3 / 4);
-
-
-        new MouseEventHandler(drawerPane);
-
+        return vBucks;
     }
-
 }
