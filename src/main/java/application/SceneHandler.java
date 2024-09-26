@@ -29,8 +29,8 @@ public class SceneHandler{
         drawerPane = new Pane();
         drawerPane.setStyle("-fx-background-color: #ffffff;");
 
-        bp.setLeft(getVBucks());
         bp.setCenter(drawerPane);
+        bp.setLeft(getVBucks());
 
         drawerPane.setPrefWidth(scene.getWidth() * 3 / 4);
 
