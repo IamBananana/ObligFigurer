@@ -21,13 +21,14 @@ public class MouseEventHandler {
     }
 
 
-
     private void handleMouseClick(MouseEvent event) {
         System.out.println("Mouse Clicked at: " + event.getSceneX() + ", " + event.getSceneY());
     }
+
     private void handleMousePressed(MouseEvent event) {
         System.out.println("Mouse Pressed at: " + event.getSceneX() + ", " + event.getSceneY());
     }
+
     private void handleMouseReleased(MouseEvent event) {
         System.out.println("Mouse Released at: " + event.getSceneX() + ", " + event.getSceneY());
     }

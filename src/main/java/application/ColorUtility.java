@@ -8,6 +8,7 @@ public class ColorUtility {
         shape.setFill(Color.WHITE);
         shape.setStroke(color);
     }
+
     public static void setFillColor(Shape shape, Color color) {
         shape.setStroke(color);
         shape.setFill(color);

@@ -8,12 +8,9 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
-import  javafx.scene.paint.Color;
+import javafx.scene.paint.Color;
 
-import java.awt.*;
-
-public class SceneHandler{
+public class SceneHandler {
     private Scene scene;
     private Pane drawerPane;
     public MainController mainController = new MainController();
@@ -23,7 +20,7 @@ public class SceneHandler{
         intialize();
     }
 
-    private void intialize(){
+    private void intialize() {
         BorderPane bp = (BorderPane) scene.getRoot();
 
         drawerPane = new Pane();
@@ -40,10 +37,9 @@ public class SceneHandler{
         shapes[1] = new myRectangle(50, 50, 100, 50, Color.BLUE);
         drawerPane.getChildren().add((Node) shapes[0]);
         drawerPane.getChildren().add((Node) shapes[1]);
-
-
     }
-    private VBox getVBucks(){
+
+    private VBox getVBucks() {
         VBox vBucks = new VBox(10);
         vBucks.setPrefWidth(scene.getWidth() / 5);
         vBucks.setAlignment(Pos.TOP_LEFT);
