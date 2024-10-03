@@ -6,7 +6,7 @@ public class HandlerHandler {
     private Button myButton;
 
     public void initialize() {
-        myButton.setOnAction(event -> handleButtonClick());
+        myButton.setOnAction(e -> handleButtonClick());
     }
 
     private void handleButtonClick() {
