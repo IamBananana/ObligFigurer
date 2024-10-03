@@ -13,7 +13,7 @@ import javafx.scene.paint.Color;
 public class SceneHandler {
     private Scene scene;
     private Pane drawerPane;
-    public MainController mainController = new MainController();
+    public HandlerHandler handlerHandler = new HandlerHandler();
 
     public SceneHandler(Scene scene) {
         this.scene = scene;

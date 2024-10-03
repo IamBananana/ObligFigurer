@@ -2,7 +2,7 @@ package application;
 
 import javafx.scene.control.Button;
 
-public class MainController {
+public class HandlerHandler {
     private Button myButton;
 
     public void initialize() {
