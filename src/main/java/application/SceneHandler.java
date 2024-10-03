@@ -19,7 +19,9 @@ public class SceneHandler {
         this.scene = scene;
         intialize();
     }
-//f
+    //her
+    //skjer
+    //bruh
     private void intialize() {
         BorderPane bp = (BorderPane) scene.getRoot();
 
