@@ -25,19 +25,14 @@ public class myRectangle extends Rectangle implements Shapes {
         return this.color = color;
     }
 
-
     @Override
     public double area() {
         return getHeight() * getWidth();
     }
 
+    @Override
     public double circumference() {
         return 2 * (getHeight() + getWidth());
-    }
-
-    @Override
-    public String toString() {
-        return getShape() + ", x: " + getX() + ", y: " + getY() + ", height: " + getHeight() + ", width: " + getWidth();
     }
 
     @Override
@@ -45,5 +40,8 @@ public class myRectangle extends Rectangle implements Shapes {
         return "Rectangle";
     }
 
-
+    @Override
+    public String toString() {
+        return getShape() + ", x: " + getX() + ", y: " + getY() + ", height: " + getHeight() + ", width: " + getWidth();
+    }
 }
