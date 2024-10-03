@@ -26,6 +26,16 @@ public class myCircle extends Circle implements Shapes {
     }
 
     @Override
+    public double getX() {
+        return getCenterX();
+    }
+
+    @Override
+    public double getY() {
+        return getCenterY();
+    }
+
+    @Override
     public double area() {
         return Math.PI * getRadius() * getRadius();
     }
