@@ -6,15 +6,15 @@ import javafx.scene.shape.Rectangle;
 public class myRectangle extends Rectangle implements Shapes {
     private Color color;
 
-    public myRectangle(int x, int y, float height, float width, Color color) {
+    public myRectangle(double x, double y, double height, double width, Color color) {
         super(x, y, width, height);
         ColorUtility.setColor(this, color);
     }
 
-    public myRectangle(int x, int y, float height, float bredde) {
+    public myRectangle(double x, double y, double height, double width) {
         super(x, y);
         setHeight(height);
-        setWidth(bredde);
+        setWidth(width);
     }
 
     public Color getColor() {
