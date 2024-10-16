@@ -13,5 +13,3 @@ public interface Shapes {
 
     String getShape();
 }
-
-
