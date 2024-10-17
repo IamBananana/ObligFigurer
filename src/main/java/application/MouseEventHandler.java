@@ -29,27 +29,41 @@ public class MouseEventHandler {
 
 
     private void handleMouseClick(MouseEvent event) {
-        System.out.println("Mouse Clicked at: " + event.getSceneX() + ", " + event.getSceneY());
-        startX = event.getSceneX();
-        startY = event.getSceneY();
+        System.out.println("Mouse Clicked at: " + event.getX() + ", " + event.getY());
+
     }
 
     private void handleMousePressed(MouseEvent event) {
+        startX = event.getX();
+        startY = event.getY();
 
-        System.out.println("Mouse Pressed at: " + event.getSceneX() + ", " + event.getSceneY());
+        System.out.println("Mouse Pressed at: " + event.getX() + ", " + event.getY());
     }
 
     private void handleMouseReleased(MouseEvent event) {
-        double endX = event.getSceneX();
-        double endY = event.getSceneY();
+        /*
+        double endX = event.getX();
+        double endY = event.getY();
         System.out.println("Mouse Released at: " + endX + ", " + endY);
 
         if (sceneHandler != null) {
-            sceneHandler.createShape(endX, endY, startX, startY);
+            sceneHandler.createShape(startX, startY, endX, endY);
         }
+
+        startX = 0;
+        startY = 0;
+
+         */
     }
 
     private void handleMouseDragged(MouseEvent event) {
+        //System.out.println("Mouse drag: " + event.getX() + " , "+ event.getY());
+        double endX = event.getX();
+        double endY = event.getY();
+        System.out.println("Mouse drag at: " + endX + ", " + endY);
 
+        if (sceneHandler != null) {
+            sceneHandler.createShape(startX, startY, endX, endY);
+        }
     }
 }

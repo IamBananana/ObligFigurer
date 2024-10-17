@@ -12,9 +12,7 @@ public class myRectangle extends Rectangle implements Shapes {
     }
 
     public myRectangle(double x, double y, double height, double width) {
-        super(x, y);
-        setHeight(height);
-        setWidth(width);
+        super(x, y, width, height);
     }
 
     public Color getColor() {

@@ -48,12 +48,6 @@ public class SceneHandler {
         mouseHandler = new MouseEventHandler(drawerPane, this);
 
         Shapes[] shapes = new Shapes[10];
-        /*
-        shapes[0] = new myCircle(20, 30, 50, Color.RED);
-        shapes[1] = new myRectangle(50, 50, 100, 50, Color.BLUE);
-        drawerPane.getChildren().add((Node) shapes[0]);
-        drawerPane.getChildren().add((Node) shapes[1]);
-         */
     }
 
     private VBox getVBucks() {
@@ -96,22 +90,22 @@ public class SceneHandler {
         return vBucks;
     }
 
-    public void createShape(double x, double y, double x2, double y2) {
+    public void createShape(double startX, double startY, double endX, double endY) {
         if (selctedType != null)
             switch (selctedType) {
-                case LINE: lineDraw(x, y);
+                case LINE: lineDraw(startX, startY);
                     break;
-                case ARC: arcDraw(x, y, x, y);
+                case ARC: arcDraw(startX, startY, startX, startY);
                     break;
-                case POLYLINE: polyLineDraw(x, y);
+                case POLYLINE: polyLineDraw(startX, startY);
                     break;
-                case RECTANGLE: rectangleDraw(x, y, x2, y2);
+                case RECTANGLE: rectangleDraw(startX, startY, endX, endY);
                     break;
-                case CIRCLE: circleDraw(x, y);
+                case CIRCLE: circleDraw(startX, startY);
                     break;
-                case ELLIPSE: ellipseDraw(x, y);
+                case ELLIPSE: ellipseDraw(startX, startY);
                     break;
-                case POLYGON: polygonDraw(x, y);
+                case POLYGON: polygonDraw(startX, startY);
                     break;
             }
     }
@@ -134,11 +128,9 @@ public class SceneHandler {
         throw new RuntimeException("SKRRRRT");
     }
 
-    private void rectangleDraw(double x, double y, double x2, double y2) {
-        myRectangle rect = new myRectangle(x, y, 50, 100);
-
-        System.out.println("I was used!!!!!!! :DDDDD");
-
+    private void rectangleDraw(double startX, double startY, double endX, double endY) {
+        //x2 y2 is released cords = width and height
+        myRectangle rect = new myRectangle(startX, startY, endX-startX, endY-startY);
         drawerPane.getChildren().add(rect);
     }
 
