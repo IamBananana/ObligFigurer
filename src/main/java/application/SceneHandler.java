@@ -3,18 +3,21 @@ package application;
 import application.SceneHandler.type;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 
 public class SceneHandler {
     private Scene scene;
+    private BorderPane rootPane;
     private Pane drawerPane;
     private MouseEventHandler mouseHandler;
     public HandlerHandler handlerHandler = new HandlerHandler();
+    private VBox shapeInfoPanel;
+    private Shape selectedShape;
 
     enum type {
         LINE,
@@ -30,6 +33,14 @@ public class SceneHandler {
     public SceneHandler(){};
     public SceneHandler(Scene scene) {
         this.scene = scene;
+        this.rootPane = (BorderPane) scene.getRoot();
+
+        shapeInfoPanel = new VBox(10);
+        shapeInfoPanel.setStyle("-fx-background-color: #f0f0f0; -fx-padding: 10px;");
+
+        rootPane.setCenter(drawerPane);
+        rootPane.setRight(shapeInfoPanel);
+
         intialize();
     }
 
@@ -139,4 +150,64 @@ public class SceneHandler {
 
         drawerPane.getChildren().add(circle);
     }
+
+    public void showShapeDetails(Shape shape) {
+        selectedShape = shape;
+        shapeInfoPanel.getChildren().clear();  // Clear previous info
+
+        // Display shape details
+        Label shapeTypeLabel = new Label("Shape: " + shape.getClass().getSimpleName());
+        Label areaLabel = new Label("Area: " + calculateArea(shape));
+        Label circumferenceLabel = new Label("Circumference: " + calculateCircumference(shape));
+
+        // Stroke color
+        ColorPicker strokeColorPicker = new ColorPicker();
+        strokeColorPicker.setValue((Color) ((Shape) shape).getStroke());
+        strokeColorPicker.setOnAction(e -> ((Shape) shape).setStroke(strokeColorPicker.getValue()));
+
+        //Fill color
+        ColorPicker fillColorPicker = new ColorPicker();
+        fillColorPicker.setValue((Color) ((Shape) shape).getFill());  // Get the current fill color
+        fillColorPicker.setOnAction(e -> ((Shape) shape).setFill(fillColorPicker.getValue()));
+
+        shapeInfoPanel.getChildren().addAll(
+                shapeTypeLabel,
+                areaLabel,
+                circumferenceLabel,
+                new Label("Stroke Color:"), strokeColorPicker,
+                new Label("Fill Color:"), fillColorPicker
+        );
+
+        // Add buttons for forward/backward schmovement
+        createMoveButtons();
+    }
+
+    private double calculateArea(Shape shape) {
+        if (shape instanceof Shapes) {
+            return ((Shapes) shape).area();
+        }
+        return 0;
+    }
+    private double calculateCircumference(Shape shape) {
+        if (shape instanceof Shapes) {
+            return ((Shapes) shape).circumference();
+        }
+        return 0;
+    }
+    private void createMoveButtons() {
+        Button forwardButton = new Button("Move Forward");
+        Button backButton = new Button("Move Backward");
+
+        forwardButton.setOnAction(e -> moveShapeForward());
+        backButton.setOnAction(e -> moveShapeBackward());
+
+        shapeInfoPanel.getChildren().addAll(forwardButton, backButton);
+    }
+
+    private void moveShapeForward() {
+    }
+
+    private void moveShapeBackward() {
+    }
+
 }
