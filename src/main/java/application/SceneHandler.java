@@ -45,14 +45,12 @@ public class SceneHandler {
     }
 
     private void intialize() {
-        BorderPane bp = (BorderPane) scene.getRoot();
-
         drawerPane = new Pane();
         drawerPane.setStyle("-fx-background-color: #ffffff;");
 
 
-        bp.setCenter(drawerPane);
-        bp.setLeft(getVBucks());
+        rootPane.setCenter(drawerPane);
+        rootPane.setLeft(getVBucks());
 
         drawerPane.setPrefWidth(scene.getWidth() * 3 / 4);
 
@@ -156,19 +154,27 @@ public class SceneHandler {
         shapeInfoPanel.getChildren().clear();  // Clear previous info
 
         // Display shape details
+        /*
+         *Er ikke alle av 'shape' vi lager av 'Shapes' interfacet?
+         * Så hvorfor sjekke? Kan vi ikke bare caste her med en gang.
+         * + ordet 'calculate' er kanskje misleading siden det ikke skjer noen kalkuleringer i metoden.
+         */
         Label shapeTypeLabel = new Label("Shape: " + shape.getClass().getSimpleName());
         Label areaLabel = new Label("Area: " + calculateArea(shape));
         Label circumferenceLabel = new Label("Circumference: " + calculateCircumference(shape));
 
         // Stroke color
         ColorPicker strokeColorPicker = new ColorPicker();
-        strokeColorPicker.setValue((Color) ((Shape) shape).getStroke());
-        strokeColorPicker.setOnAction(e -> ((Shape) shape).setStroke(strokeColorPicker.getValue()));
+        strokeColorPicker.setValue((Color) shape.getStroke());
+        strokeColorPicker.setOnAction(e -> {
+            System.out.println("hii");
+            shape.setStroke(strokeColorPicker.getValue());
+        });
 
         //Fill color
         ColorPicker fillColorPicker = new ColorPicker();
-        fillColorPicker.setValue((Color) ((Shape) shape).getFill());  // Get the current fill color
-        fillColorPicker.setOnAction(e -> ((Shape) shape).setFill(fillColorPicker.getValue()));
+        fillColorPicker.setValue((Color) shape.getFill());  // Get the current fill color
+        fillColorPicker.setOnAction(e -> shape.setFill(fillColorPicker.getValue()));
 
         shapeInfoPanel.getChildren().addAll(
                 shapeTypeLabel,
