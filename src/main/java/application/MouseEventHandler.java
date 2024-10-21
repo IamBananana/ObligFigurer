@@ -1,69 +1,85 @@
 package application;
 
+import application.myCircle;
+import application.myRectangle;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Shape;
 
 public class MouseEventHandler {
     double startX, startY;
     private final Pane drawablePane;
     private SceneHandler sceneHandler;
+    private Shape currentShape;  // Current shape being drawn
 
     public MouseEventHandler(Pane drawablePane, SceneHandler sceneHandler) {
         this.drawablePane = drawablePane;
         setSceneHandler(sceneHandler);
         addMouseListeners();
     }
+
     public void setSceneHandler(SceneHandler sceneHandler) {
         this.sceneHandler = sceneHandler;
     }
 
     private void addMouseListeners() {
-        drawablePane.setOnMouseClicked(this::handleMouseClick);
-
         drawablePane.setOnMousePressed(this::handleMousePressed);
-
-        drawablePane.setOnMouseReleased(this::handleMouseReleased);
-
         drawablePane.setOnMouseDragged(this::handleMouseDragged);
-    }
-
-
-    private void handleMouseClick(MouseEvent event) {
-        System.out.println("Mouse Clicked at: " + event.getX() + ", " + event.getY());
-
+        drawablePane.setOnMouseReleased(this::handleMouseReleased);
     }
 
     private void handleMousePressed(MouseEvent event) {
         startX = event.getX();
         startY = event.getY();
 
-        System.out.println("Mouse Pressed at: " + event.getX() + ", " + event.getY());
-    }
 
-    private void handleMouseReleased(MouseEvent event) {
-        /*
-        double endX = event.getX();
-        double endY = event.getY();
-        System.out.println("Mouse Released at: " + endX + ", " + endY);
+        switch (sceneHandler.selctedType) {
+            case RECTANGLE:
+                currentShape = new myRectangle(startX, startY, 0, 0);
+                break;
+            case CIRCLE:
+                currentShape = new myCircle(startX, startY, 0);
+                break;
+            case ELLIPSE:
+                currentShape = new myEllipse(startX, startY, 0, 0);
+                break;
 
-        if (sceneHandler != null) {
-            sceneHandler.createShape(startX, startY, endX, endY);
         }
 
-        startX = 0;
-        startY = 0;
-
-         */
+        if (currentShape != null) {
+            drawablePane.getChildren().add(currentShape);  //legger til shapen, kan adde her til datastruktur?
+        }
     }
 
     private void handleMouseDragged(MouseEvent event) {
-        //System.out.println("Mouse drag: " + event.getX() + " , "+ event.getY());
         double endX = event.getX();
         double endY = event.getY();
-        System.out.println("Mouse drag at: " + endX + ", " + endY);
 
-        if (sceneHandler != null) {
-            sceneHandler.createShape(startX, startY, endX, endY);
+
+        if (currentShape instanceof myRectangle) {
+            myRectangle rect = (myRectangle) currentShape;
+            rect.setX(Math.min(startX, endX));
+            rect.setY(Math.min(startY, endY));
+            rect.setWidth(Math.abs(endX - startX));
+            rect.setHeight(Math.abs(endY - startY));
+        } else if (currentShape instanceof myCircle) {
+            myCircle circle = (myCircle) currentShape;
+            double radius = Math.hypot(endX - startX, endY - startY) / 2;  // Calculate radius
+            circle.setCenterX((startX + endX) / 2);
+            circle.setCenterY((startY + endY) / 2);
+            circle.setRadius(radius);
+        } else if (currentShape instanceof myEllipse) {
+            myEllipse ellipse = (myEllipse) currentShape;
+            ellipse.setCenterX((startX + endX) / 2);
+            ellipse.setCenterY((startY + endY) / 2);
+            ellipse.setRadiusX(Math.abs(endX - startX) / 2);
+            ellipse.setRadiusY(Math.abs(endY - startY) / 2);
         }
+            // Flere shapes går under her
+    }
+
+    private void handleMouseReleased(MouseEvent event) {
+        // Reset current shape
+        currentShape = null;
     }
 }

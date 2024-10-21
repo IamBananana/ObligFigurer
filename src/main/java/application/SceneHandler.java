@@ -130,8 +130,8 @@ public class SceneHandler {
 
     private void rectangleDraw(double startX, double startY, double endX, double endY) {
         //x2 y2 is released cords = width and height
-        myRectangle rect = new myRectangle(startX, startY, endY, endX);
-        drawerPane.getChildren().add(rect);
+        myRectangle rectangle = new myRectangle(startX, startY, endY, endX);
+        drawerPane.getChildren().add(rectangle);
     }
 
     private void circleDraw(double x, double y){
