@@ -139,20 +139,19 @@ public class SceneHandler {
                 new Label("Fill Color:"), fillColorPicker
         );
 
-        // Add buttons for forward/backward schmovement
         createMoveButtons();
     }
 
     private double getArea(Shape shape) {
         if (shape instanceof Shapes) {
-            return ((Shapes) shape).area();
+            return ((Shapes) shape).getArea();
         }
         return 0;
     }
 
     private double getCircumference(Shape shape) {
         if (shape instanceof Shapes) {
-            return ((Shapes) shape).circumference();
+            return ((Shapes) shape).getCircumference();
         }
         return 0;
     }
@@ -167,26 +166,12 @@ public class SceneHandler {
         shapeInfoPanel.getChildren().addAll(forwardButton, backButton);
     }
 
-    public void addShape(Shapes shape) {
-        // Check for duplicates based on unique characteristics, e.g., position and size
-        if (!shapesList.contains(shape)) {
-            shapesList.add(shape);  // Add shape to the LinkedList
-            drawerPane.getChildren().add((Node) shape);  // Add shape to the pane
-            updateShapeInfoPanel();  // Update the panel to reflect the new total count
-        } else {
-            System.out.println("Duplicate shape detected, not adding to the list.");
-        }
-    }
-
     private void moveShapeForward() {
         int index = shapesList.indexOf(selectedShape);
-        if (index < shapesList.size() - 1) {
+        if (index >= 0 && index < shapesList.size() - 1) {
 
-            Shapes nextShape = shapesList.get(index + 1);
-            shapesList.set(index, nextShape);
-            shapesList.set(index + 1, (Shapes) selectedShape);
-
-
+            Shapes shapeToMove = shapesList.remove(index);
+            shapesList.add(index + 1, shapeToMove);
             refreshPane();
         }
     }
@@ -194,13 +179,10 @@ public class SceneHandler {
     private void moveShapeBackward() {
         int index = shapesList.indexOf(selectedShape);
         if (index > 0) {
-
-            Shapes previousShape = shapesList.get(index - 1);
-            shapesList.set(index, previousShape);
-            shapesList.set(index - 1, (Shapes) selectedShape);
-
-
-            refreshPane();
+            // Move the selected shape to the previous position
+            Shapes shapeToMove = shapesList.remove(index);
+            shapesList.add(index - 1, shapeToMove);
+            refreshPane();  // Refresh the pane to update the display
         }
     }
 
@@ -216,13 +198,37 @@ public class SceneHandler {
     private void updateShapeInfoPanel() {
         if (selectedShape != null) {
             int totalShapes = shapesList.size();
-            int currentIndex = shapesList.indexOf(selectedShape) + 1; // 1-based index
+            int currentIndex = shapesList.indexOf(selectedShape) + 1;
             Label shapePositionLabel = new Label("Shape " + currentIndex + " of " + totalShapes);
 
-            // Update the existing shape position label
-            if (shapeInfoPanel.getChildren().size() > 4) { // Assuming position label is at index 4
+
+            if (shapeInfoPanel.getChildren().size() > 4) {
                 shapeInfoPanel.getChildren().set(4, shapePositionLabel);
             }
         }
     }
+    public void addShape(Shapes shape) {
+
+        boolean isDuplicate = false;
+
+        for (Shapes existingShape : shapesList) {
+
+            if (existingShape.getX() == shape.getX() &&
+                    existingShape.getY() == shape.getY() &&
+                    existingShape.getClass() == shape.getClass()) {
+                isDuplicate = true;
+                break;
+            }
+        }
+
+        if (!isDuplicate) {
+            shapesList.add(shape);
+            drawerPane.getChildren().add((Node) shape);
+            updateShapeInfoPanel();
+            System.out.println("Shape added: " + shape);
+        } else {
+            System.out.println("Duplicate shape detected, not adding to the list: " + shape);
+        }
+    }
+
 }

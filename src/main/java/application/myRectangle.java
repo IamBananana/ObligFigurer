@@ -31,12 +31,12 @@ public class myRectangle extends Rectangle implements Shapes {
     }
 
     @Override
-    public double area() {
+    public double getArea() {
         return getHeight() * getWidth();
     }
 
     @Override
-    public double circumference() {
+    public double getCircumference() {
         return 2 * (getHeight() + getWidth());
     }
 

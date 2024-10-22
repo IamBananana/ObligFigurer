@@ -1,16 +1,15 @@
 package application;
 
 import javafx.scene.Node;
-import javafx.scene.shape.Shape;
 
 public interface Shapes {
     double getX();
 
     double getY();
 
-    double area();
+    double getArea();
 
-    double circumference();
+    double getCircumference();
 
     String toString();
 

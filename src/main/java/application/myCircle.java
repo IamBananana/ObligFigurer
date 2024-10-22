@@ -38,12 +38,12 @@ public class myCircle extends Circle implements Shapes {
     }
 
     @Override
-    public double area() {
+    public double getArea() {
         return Math.PI * getRadius() * getRadius();
     }
 
     @Override
-    public double circumference() {
+    public double getCircumference() {
         return 2 * Math.PI * getRadius();
     }
 
@@ -61,7 +61,7 @@ public class myCircle extends Circle implements Shapes {
     @Override
     public String toString() {
         return getShape() + ", x: " + getCenterX() + ", y: " + getCenterY() +
-                ", radius: " + getRadius() + ", area: " + area() + ", circumference: " + circumference();
+                ", radius: " + getRadius() + ", area: " + getArea() + ", circumference: " + getCircumference();
     }
 
     @Override

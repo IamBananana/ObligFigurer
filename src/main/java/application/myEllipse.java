@@ -24,12 +24,12 @@ public class myEllipse extends Ellipse implements Shapes {
     }
 
     @Override
-    public double area() {
+    public double getArea() {
         return Math.PI * getRadiusX() * getRadiusY();
     }
 
     @Override
-    public double circumference() {
+    public double getCircumference() {
         return Math.PI * (3 * (getRadiusX() + getRadiusY()) - Math.sqrt((3 * getRadiusX() + getRadiusY()) * (getRadiusX() + 3 * getRadiusY())));
     }
 
