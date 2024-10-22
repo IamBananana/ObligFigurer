@@ -35,4 +35,9 @@ public class myEllipse extends Ellipse implements Shapes {
     public String getShape() {
         return "Ellipse";
     }
+    @Override
+    public String toString() {
+        return getShape() + ", x: " + getX() + ", y: " + getY() + ", radius: " + getRadiusX() + ", radius: " + getRadiusY()
+                + ", area: " + area() + ", circumference: " + circumference();
+    }
 }
