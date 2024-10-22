@@ -1,6 +1,7 @@
 package application;
 
 import javafx.scene.Node;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
@@ -36,7 +37,7 @@ public class MouseEventHandler {
         startY = event.getY();
 
 
-        switch (sceneHandler.selctedType) {
+        switch (sceneHandler.selectedType) {
             case RECTANGLE:
                 currentShape = new myRectangle(startX, startY, 0, 0);
                 sceneHandler.addShape((Shapes) currentShape);
@@ -48,6 +49,18 @@ public class MouseEventHandler {
             case ELLIPSE:
                 currentShape = new myEllipse(startX, startY, 0, 0);
                 sceneHandler.addShape((Shapes) currentShape);
+                break;
+            case TEXT:
+                TextInputDialog dialog = new TextInputDialog("Your Text Here");
+                dialog.setTitle("Input Text");
+                dialog.setHeaderText("Enter the text you want to display:");
+                dialog.setContentText("Text:");
+
+                dialog.showAndWait().ifPresent(content -> {
+                    currentShape = new myText(startX, startY, content);
+                    drawablePane.getChildren().add(currentShape);  // Add to the pane for visual feedback
+                    sceneHandler.addShape((Shapes) currentShape); // Add shape to the handler
+                });
                 break;
 
         }
@@ -61,7 +74,7 @@ public class MouseEventHandler {
         double endX = event.getX();
         double endY = event.getY();
 
-        switch (sceneHandler.selctedType) {
+        switch (sceneHandler.selectedType) {
             case RECTANGLE:
                 ((myRectangle) currentShape).createShape(startX, startY, endX, endY);
                 break;

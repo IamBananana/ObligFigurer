@@ -1,6 +1,7 @@
 package application;
 
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -29,10 +30,11 @@ public class SceneHandler {
         ARC,
         POLYGON,
         POLYLINE,
-        ELLIPSE;
+        ELLIPSE,
+        TEXT
     }
 
-    type selctedType;
+    type selectedType;
 
     public SceneHandler() {}
 
@@ -65,6 +67,7 @@ public class SceneHandler {
         vBucks.setAlignment(Pos.TOP_LEFT);
         vBucks.setStyle("-fx-background-color: #cccccc; -fx-padding: 10px;");
         ToggleGroup tg = new ToggleGroup();
+        RadioButton selector = new RadioButton("Selector");
         //Line types
         RadioButton line = new RadioButton("Line");
         RadioButton arc = new RadioButton("Arc");
@@ -76,6 +79,9 @@ public class SceneHandler {
         RadioButton circle = new RadioButton("Circle");
         RadioButton ellipse = new RadioButton("Ellipse");
         RadioButton polygon = new RadioButton("Polygon");
+        RadioButton text = new RadioButton("Text");
+
+        selector.setToggleGroup(tg);
         line.setToggleGroup(tg);
         arc.setToggleGroup(tg);
         polyline.setToggleGroup(tg);
@@ -83,18 +89,40 @@ public class SceneHandler {
         circle.setToggleGroup(tg);
         ellipse.setToggleGroup(tg);
         polygon.setToggleGroup(tg);
+        text.setToggleGroup(tg);
 
-        line.setOnAction(e -> selctedType = type.LINE);
-        arc.setOnAction(e -> selctedType = type.ARC);
-        polyline.setOnAction(e -> selctedType = type.POLYLINE);
-        rectangle.setOnAction(e -> selctedType = type.RECTANGLE);
-        circle.setOnAction(e -> selctedType = type.CIRCLE);
-        ellipse.setOnAction(e -> selctedType = type.ELLIPSE);
-        polygon.setOnAction(e -> selctedType = type.POLYGON);
+        selector.setOnAction(e -> {
+            selectedType = null;
+            drawerPane.setCursor(Cursor.CROSSHAIR); });
+        selector.setOnAction(e -> {
+            selectedType = null;
+            drawerPane.setCursor(Cursor.CROSSHAIR); });
+        line.setOnAction(e -> {
+            selectedType = type.LINE;
+            drawerPane.setCursor(Cursor.DEFAULT); });
+        arc.setOnAction(e -> {
+            selectedType = type.ARC;
+            drawerPane.setCursor(Cursor.DEFAULT); });
+        polyline.setOnAction(e -> {
+            selectedType = type.POLYLINE;
+            drawerPane.setCursor(Cursor.DEFAULT); });
+        rectangle.setOnAction(e -> {
+            selectedType = type.RECTANGLE;
+            drawerPane.setCursor(Cursor.DEFAULT); });
+        circle.setOnAction(e -> {
+            selectedType = type.CIRCLE;
+            drawerPane.setCursor(Cursor.DEFAULT); });
+        ellipse.setOnAction(e -> {
+            selectedType = type.ELLIPSE;
+            drawerPane.setCursor(Cursor.DEFAULT); });
+        polygon.setOnAction(e -> {
+            selectedType = type.POLYGON;
+            drawerPane.setCursor(Cursor.DEFAULT); });
+        text.setOnAction(e -> {
+            selectedType = type.TEXT;
+            drawerPane.setCursor(Cursor.DEFAULT); });
 
-        //For laterrr
-        // RadioButton radioButton = (RadioButton) tg.getSelectedToggle();
-        vBucks.getChildren().addAll(line, arc, polyline, rectangle, circle, ellipse, polygon);
+        vBucks.getChildren().addAll(selector, line, arc, polyline, rectangle, circle, ellipse, polygon, text);
 
         return vBucks;
     }
@@ -103,17 +131,6 @@ public class SceneHandler {
         selectedShape = shape;
         shapeInfoPanel.getChildren().clear();  // Clear previous info
 
-        // Display shape details
-        /*
-         *Er ikke alle av 'shape' vi lager av 'Shapes' interfacet?
-         * Så hvorfor sjekke? Kan vi ikke bare caste her med en gang.
-         * + ordet 'calculate' er kanskje misleading siden det ikke skjer noen kalkuleringer i metoden.
-         *
-         *
-         * Enig, endra d te getArea/circumference
-         * prøvde å bruke shapes interface for å getShape() men d bugga
-         */
-//        Label shapeTypeLabel = new Label("Shape: " + shapes.getShape());
         Label shapeTypeLabel = new Label("Shape: " + shape.getClass().getSimpleName());
         Label areaLabel = new Label("Area: " + getArea(shape));
         Label circumferenceLabel = new Label("Circumference: " + getCircumference(shape));
@@ -130,6 +147,11 @@ public class SceneHandler {
         ColorPicker fillColorPicker = new ColorPicker();
         fillColorPicker.setValue((Color) shape.getFill());  // Get the current fill color
         fillColorPicker.setOnAction(e -> shape.setFill(fillColorPicker.getValue()));
+
+        if (shape instanceof myText textShape) {
+            Label textContentLabel = new Label("Text Content: " + textShape.getText());
+            shapeInfoPanel.getChildren().add(textContentLabel);
+        }
 
         shapeInfoPanel.getChildren().addAll(
                 shapeTypeLabel,
