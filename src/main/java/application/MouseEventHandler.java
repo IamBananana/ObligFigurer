@@ -53,6 +53,7 @@ public class MouseEventHandler {
 
         if (currentShape != null) {
             drawablePane.getChildren().add(currentShape);  //legger til shapen, kan adde her til datastruktur?
+            sceneHandler.addShape((Shapes) currentShape);
         }
     }
 

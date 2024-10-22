@@ -1,6 +1,7 @@
 package application;
 
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -19,6 +20,7 @@ public class SceneHandler {
     public HandlerHandler handlerHandler = new HandlerHandler();
     private VBox shapeInfoPanel;
     private Shape selectedShape;
+    private LinkedList<Shapes> shapesList = new LinkedList<>();
 
     enum type {
         LINE,
@@ -164,10 +166,62 @@ public class SceneHandler {
         shapeInfoPanel.getChildren().addAll(forwardButton, backButton);
     }
 
-    private void moveShapeBackward() {
+    public void addShape(Shapes shape) {
+        // Check for duplicates based on unique characteristics, e.g., position and size
+        if (!shapesList.contains(shape)) {
+            shapesList.add(shape);  // Add shape to the LinkedList
+            drawerPane.getChildren().add((Node) shape);  // Add shape to the pane
+            updateShapeInfoPanel();  // Update the panel to reflect the new total count
+        } else {
+            System.out.println("Duplicate shape detected, not adding to the list.");
+        }
     }
 
     private void moveShapeForward() {
+        int index = shapesList.indexOf(selectedShape);
+        if (index < shapesList.size() - 1) {
+
+            Shapes nextShape = shapesList.get(index + 1);
+            shapesList.set(index, nextShape);
+            shapesList.set(index + 1, (Shapes) selectedShape);
+
+
+            refreshPane();
+        }
     }
 
+    private void moveShapeBackward() {
+        int index = shapesList.indexOf(selectedShape);
+        if (index > 0) {
+
+            Shapes previousShape = shapesList.get(index - 1);
+            shapesList.set(index, previousShape);
+            shapesList.set(index - 1, (Shapes) selectedShape);
+
+
+            refreshPane();
+        }
+    }
+
+    private void refreshPane() {
+
+        drawerPane.getChildren().clear();
+        for (Shapes shape : shapesList) {
+            drawerPane.getChildren().add((Node) shape);
+        }
+        updateShapeInfoPanel();  // Update position info
+    }
+
+    private void updateShapeInfoPanel() {
+        if (selectedShape != null) {
+            int totalShapes = shapesList.size();
+            int currentIndex = shapesList.indexOf(selectedShape) + 1; // 1-based index
+            Label shapePositionLabel = new Label("Shape " + currentIndex + " of " + totalShapes);
+
+            // Update the existing shape position label
+            if (shapeInfoPanel.getChildren().size() > 4) { // Assuming position label is at index 4
+                shapeInfoPanel.getChildren().set(4, shapePositionLabel);
+            }
+        }
+    }
 }
