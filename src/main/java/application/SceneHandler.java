@@ -158,10 +158,15 @@ public class SceneHandler {
          *Er ikke alle av 'shape' vi lager av 'Shapes' interfacet?
          * Så hvorfor sjekke? Kan vi ikke bare caste her med en gang.
          * + ordet 'calculate' er kanskje misleading siden det ikke skjer noen kalkuleringer i metoden.
+         *
+         *
+         * Enig, endra d te getArea/circumference
+         * prøvde å bruke shapes interface for å getShape() men d bugga
          */
+//        Label shapeTypeLabel = new Label("Shape: " + shapes.getShape());
         Label shapeTypeLabel = new Label("Shape: " + shape.getClass().getSimpleName());
-        Label areaLabel = new Label("Area: " + calculateArea(shape));
-        Label circumferenceLabel = new Label("Circumference: " + calculateCircumference(shape));
+        Label areaLabel = new Label("Area: " + getArea(shape));
+        Label circumferenceLabel = new Label("Circumference: " + getCircumference(shape));
 
         // Stroke color
         ColorPicker strokeColorPicker = new ColorPicker();
@@ -188,13 +193,13 @@ public class SceneHandler {
         createMoveButtons();
     }
 
-    private double calculateArea(Shape shape) {
+    private double getArea(Shape shape) {
         if (shape instanceof Shapes) {
             return ((Shapes) shape).area();
         }
         return 0;
     }
-    private double calculateCircumference(Shape shape) {
+    private double getCircumference(Shape shape) {
         if (shape instanceof Shapes) {
             return ((Shapes) shape).circumference();
         }
