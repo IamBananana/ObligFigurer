@@ -39,19 +39,21 @@ public class MouseEventHandler {
         switch (sceneHandler.selctedType) {
             case RECTANGLE:
                 currentShape = new myRectangle(startX, startY, 0, 0);
+                sceneHandler.addShape((Shapes) currentShape);
                 break;
             case CIRCLE:
                 currentShape = new myCircle(startX, startY, 0);
+                sceneHandler.addShape((Shapes) currentShape);
                 break;
             case ELLIPSE:
                 currentShape = new myEllipse(startX, startY, 0, 0);
+                sceneHandler.addShape((Shapes) currentShape);
                 break;
 
         }
 
         if (currentShape != null) {
             drawablePane.getChildren().add(currentShape);  //legger til shapen, kan adde her til datastruktur?
-            sceneHandler.addShape((Shapes) currentShape);
         }
     }
 

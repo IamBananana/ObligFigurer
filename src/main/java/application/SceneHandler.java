@@ -144,14 +144,14 @@ public class SceneHandler {
 
     private double getArea(Shape shape) {
         if (shape instanceof Shapes) {
-            return ((Shapes) shape).area();
+            return ((Shapes) shape).getArea();
         }
         return 0;
     }
 
     private double getCircumference(Shape shape) {
         if (shape instanceof Shapes) {
-            return ((Shapes) shape).circumference();
+            return ((Shapes) shape).getCircumference();
         }
         return 0;
     }
@@ -166,40 +166,23 @@ public class SceneHandler {
         shapeInfoPanel.getChildren().addAll(forwardButton, backButton);
     }
 
-    public void addShape(Shapes shape) {
-
-        if (!shapesList.contains(shape)) {
-            shapesList.add(shape);
-            drawerPane.getChildren().add((Node) shape);
-            updateShapeInfoPanel();
-        } else {
-            System.out.println("Duplicate shape detected, not adding to the list.");
-        }
-    }
-
     private void moveShapeForward() {
         int index = shapesList.indexOf(selectedShape);
-        if (index < shapesList.size() - 1) {
-
-            Shapes nextShape = shapesList.get(index + 1);
-            shapesList.set(index, nextShape);
-            shapesList.set(index + 1, (Shapes) selectedShape);
-
-
-            refreshPane();
+        if (index >= 0 && index < shapesList.size() - 1) {
+            // Move the selected shape to the next position
+            Shapes shapeToMove = shapesList.remove(index);
+            shapesList.add(index + 1, shapeToMove);
+            refreshPane();  // Refresh the pane to update the display
         }
     }
 
     private void moveShapeBackward() {
         int index = shapesList.indexOf(selectedShape);
         if (index > 0) {
-
-            Shapes previousShape = shapesList.get(index - 1);
-            shapesList.set(index, previousShape);
-            shapesList.set(index - 1, (Shapes) selectedShape);
-
-
-            refreshPane();
+            // Move the selected shape to the previous position
+            Shapes shapeToMove = shapesList.remove(index);
+            shapesList.add(index - 1, shapeToMove);
+            refreshPane();  // Refresh the pane to update the display
         }
     }
 
@@ -224,4 +207,28 @@ public class SceneHandler {
             }
         }
     }
+    public void addShape(Shapes shape) {
+        // Check for duplicates based on a unique property like a UUID or shape's dimensions
+        boolean isDuplicate = false;
+
+        for (Shapes existingShape : shapesList) {
+            // Instead of comparing area and circumference, compare using unique parameters
+            if (existingShape.getX() == shape.getX() &&
+                    existingShape.getY() == shape.getY() &&
+                    existingShape.getClass() == shape.getClass()) {
+                isDuplicate = true;
+                break;  // Exit loop on first duplicate found
+            }
+        }
+
+        if (!isDuplicate) {
+            shapesList.add(shape);  // Add shape to the LinkedList
+            drawerPane.getChildren().add((Node) shape);  // Add shape to the pane
+            updateShapeInfoPanel();  // Update the panel to reflect the new total count
+            System.out.println("Shape added: " + shape);
+        } else {
+            System.out.println("Duplicate shape detected, not adding to the list: " + shape);
+        }
+    }
+
 }
