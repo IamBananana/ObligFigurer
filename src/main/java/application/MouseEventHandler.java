@@ -5,8 +5,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 
-import java.util.LinkedList;
-
 public class MouseEventHandler {
     double startX, startY;
     private final Pane drawablePane;

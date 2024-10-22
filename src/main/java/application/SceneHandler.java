@@ -167,11 +167,11 @@ public class SceneHandler {
     }
 
     public void addShape(Shapes shape) {
-        // Check for duplicates based on unique characteristics, e.g., position and size
+
         if (!shapesList.contains(shape)) {
-            shapesList.add(shape);  // Add shape to the LinkedList
-            drawerPane.getChildren().add((Node) shape);  // Add shape to the pane
-            updateShapeInfoPanel();  // Update the panel to reflect the new total count
+            shapesList.add(shape);
+            drawerPane.getChildren().add((Node) shape);
+            updateShapeInfoPanel();
         } else {
             System.out.println("Duplicate shape detected, not adding to the list.");
         }
