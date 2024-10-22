@@ -35,4 +35,12 @@ public class myEllipse extends Ellipse implements Shapes {
     public String getShape() {
         return "Ellipse";
     }
+
+    @Override
+    public void createShape(double startX, double startY, double endX, double endY){
+        this.setCenterX((startX + endX) / 2);
+        this.setCenterY((startY + endY) / 2);
+        this.setRadiusX(Math.abs(endX - startX) / 2);
+        this.setRadiusY(Math.abs(endY - startY) / 2);
+    }
 }

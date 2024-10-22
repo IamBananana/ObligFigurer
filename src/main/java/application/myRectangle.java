@@ -15,6 +15,8 @@ public class myRectangle extends Rectangle implements Shapes {
         super(x, y, width, height);
     }
 
+    private myRectangle(){};
+
     public Color getColor() {
         return color;
     }
@@ -41,5 +43,13 @@ public class myRectangle extends Rectangle implements Shapes {
     @Override
     public String toString() {
         return getShape() + ", x: " + getX() + ", y: " + getY() + ", height: " + getHeight() + ", width: " + getWidth();
+    }
+
+    @Override
+    public void createShape(double startX, double startY, double endX, double endY){
+        this.setX(Math.min(startX, endX));
+        this.setY(Math.min(startY, endY));
+        this.setWidth(Math.abs(endX - startX));
+        this.setHeight(Math.abs(endY - startY));
     }
 }

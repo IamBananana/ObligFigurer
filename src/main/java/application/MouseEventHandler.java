@@ -60,24 +60,16 @@ public class MouseEventHandler {
 
 
         if (currentShape instanceof myRectangle) {
-            myRectangle rect = (myRectangle) currentShape;
-            rect.setX(Math.min(startX, endX));
-            rect.setY(Math.min(startY, endY));
-            rect.setWidth(Math.abs(endX - startX));
-            rect.setHeight(Math.abs(endY - startY));
+            //Er dette bedre???
+            ((myRectangle) currentShape).createShape(startX, startY, endX, endY);
         } else if (currentShape instanceof myCircle) {
             myCircle circle = (myCircle) currentShape;
-            double radius = Math.hypot(endX - startX, endY - startY) / 2;  // Kem sa Pytagoras læresetning va useless?
-            circle.setCenterX((startX + endX) / 2);
-            circle.setCenterY((startY + endY) / 2);
-            circle.setRadius(radius);
+            circle.createShape(startX, startY, endX, endY);
         } else if (currentShape instanceof myEllipse) {
             myEllipse ellipse = (myEllipse) currentShape;
-            ellipse.setCenterX((startX + endX) / 2);
-            ellipse.setCenterY((startY + endY) / 2);
-            ellipse.setRadiusX(Math.abs(endX - startX) / 2);
-            ellipse.setRadiusY(Math.abs(endY - startY) / 2);
+            ellipse.createShape(startX, startY, endX, endY);
         }
+
         // Flere shapes går under her
     }
 
