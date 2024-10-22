@@ -1,9 +1,11 @@
 package application;
 
+import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 
 public class myEllipse extends Ellipse implements Shapes {
+    private Ellipse ellipse;
 
     public myEllipse(double centerX, double centerY, double radiusX, double radiusY) {
         super(centerX, centerY, radiusX, radiusY);
@@ -37,10 +39,15 @@ public class myEllipse extends Ellipse implements Shapes {
     }
 
     @Override
-    public void createShape(double startX, double startY, double endX, double endY){
+    public void createShape(double startX, double startY, double endX, double endY) {
         this.setCenterX((startX + endX) / 2);
         this.setCenterY((startY + endY) / 2);
         this.setRadiusX(Math.abs(endX - startX) / 2);
         this.setRadiusY(Math.abs(endY - startY) / 2);
+    }
+
+    @Override
+    public Node getShapeNode() {
+        return ellipse;
     }
 }

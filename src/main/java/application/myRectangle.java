@@ -1,10 +1,12 @@
 package application;
 
+import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class myRectangle extends Rectangle implements Shapes {
     private Color color;
+    private Rectangle rectangle;
 
     public myRectangle(double x, double y, double height, double width, Color color) {
         super(x, y, width, height);
@@ -15,7 +17,10 @@ public class myRectangle extends Rectangle implements Shapes {
         super(x, y, width, height);
     }
 
-    private myRectangle(){};
+    private myRectangle() {
+    }
+
+    ;
 
     public Color getColor() {
         return color;
@@ -46,10 +51,15 @@ public class myRectangle extends Rectangle implements Shapes {
     }
 
     @Override
-    public void createShape(double startX, double startY, double endX, double endY){
+    public void createShape(double startX, double startY, double endX, double endY) {
         this.setX(Math.min(startX, endX));
         this.setY(Math.min(startY, endY));
         this.setWidth(Math.abs(endX - startX));
         this.setHeight(Math.abs(endY - startY));
+    }
+
+    @Override
+    public Node getShapeNode() {
+        return rectangle;
     }
 }

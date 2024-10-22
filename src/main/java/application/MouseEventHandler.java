@@ -5,6 +5,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 
+import java.util.LinkedList;
+
 public class MouseEventHandler {
     double startX, startY;
     private final Pane drawablePane;
@@ -58,19 +60,17 @@ public class MouseEventHandler {
         double endX = event.getX();
         double endY = event.getY();
 
-
-        if (currentShape instanceof myRectangle) {
-            //Er dette bedre???
-            ((myRectangle) currentShape).createShape(startX, startY, endX, endY);
-        } else if (currentShape instanceof myCircle) {
-            myCircle circle = (myCircle) currentShape;
-            circle.createShape(startX, startY, endX, endY);
-        } else if (currentShape instanceof myEllipse) {
-            myEllipse ellipse = (myEllipse) currentShape;
-            ellipse.createShape(startX, startY, endX, endY);
+        switch (sceneHandler.selctedType) {
+            case RECTANGLE:
+                ((myRectangle) currentShape).createShape(startX, startY, endX, endY);
+                break;
+            case CIRCLE:
+                ((myCircle) currentShape).createShape(startX, startY, endX, endY);
+                break;
+            case ELLIPSE:
+                ((myEllipse) currentShape).createShape(startX, startY, endX, endY);
         }
 
-        // Flere shapes går under her
     }
 
     private void handleMouseReleased(MouseEvent event) {

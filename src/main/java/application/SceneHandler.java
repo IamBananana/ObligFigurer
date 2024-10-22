@@ -1,6 +1,5 @@
 package application;
 
-import application.SceneHandler.type;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -8,7 +7,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.*;
+import javafx.scene.shape.Shape;
+
+import java.util.LinkedList;
 
 public class SceneHandler {
     private Scene scene;
@@ -30,7 +31,9 @@ public class SceneHandler {
     }
 
     type selctedType;
-    public SceneHandler(){};
+
+    public SceneHandler() {}
+
     public SceneHandler(Scene scene) {
         this.scene = scene;
         this.rootPane = (BorderPane) scene.getRoot();
@@ -40,11 +43,7 @@ public class SceneHandler {
 
         rootPane.setCenter(drawerPane);
         rootPane.setRight(shapeInfoPanel);
-
-        intialize();
-    }
-
-    private void intialize() {
+        
         drawerPane = new Pane();
         drawerPane.setStyle("-fx-background-color: #ffffff;");
 
@@ -55,8 +54,6 @@ public class SceneHandler {
         drawerPane.setPrefWidth(scene.getWidth() * 3 / 4);
 
         mouseHandler = new MouseEventHandler(drawerPane, this);
-
-        Shapes[] shapes = new Shapes[10];
     }
 
     private VBox getVBucks() {
@@ -97,56 +94,6 @@ public class SceneHandler {
         vBucks.getChildren().addAll(line, arc, polyline, rectangle, circle, ellipse, polygon);
 
         return vBucks;
-    }
-
-    public void createShape(double startX, double startY, double endX, double endY) {
-        if (selctedType != null)
-            switch (selctedType) {
-                case LINE: lineDraw(startX, startY);
-                    break;
-                case ARC: arcDraw(startX, startY, startX, startY);
-                    break;
-                case POLYLINE: polyLineDraw(startX, startY);
-                    break;
-                case RECTANGLE: rectangleDraw(startX, startY, endX, endY);
-                    break;
-                case CIRCLE: circleDraw(startX, startY);
-                    break;
-                case ELLIPSE: ellipseDraw(startX, startY);
-                    break;
-                case POLYGON: polygonDraw(startX, startY);
-                    break;
-            }
-    }
-
-    private void ellipseDraw(double x, double y) {
-    }
-
-    private void polygonDraw(double x, double y) {
-    }
-
-    private void lineDraw(double startX, double startY) {
-
-    }
-
-    private void arcDraw(double startX, double startY, double endX, double endY) {
-        throw new RuntimeException("BRRRR");
-    }
-
-    private void polyLineDraw(double x, double y){
-        throw new RuntimeException("SKRRRRT");
-    }
-
-    private void rectangleDraw(double startX, double startY, double endX, double endY) {
-        //x2 y2 is released cords = width and height
-        myRectangle rectangle = new myRectangle(startX, startY, endY, endX);
-        drawerPane.getChildren().add(rectangle);
-    }
-
-    private void circleDraw(double x, double y){
-        myCircle circle = new myCircle(x, y, 20);
-
-        drawerPane.getChildren().add(circle);
     }
 
     public void showShapeDetails(Shape shape) {
@@ -199,12 +146,14 @@ public class SceneHandler {
         }
         return 0;
     }
+
     private double getCircumference(Shape shape) {
         if (shape instanceof Shapes) {
             return ((Shapes) shape).circumference();
         }
         return 0;
     }
+
     private void createMoveButtons() {
         Button forwardButton = new Button("Move Forward");
         Button backButton = new Button("Move Backward");
@@ -215,10 +164,10 @@ public class SceneHandler {
         shapeInfoPanel.getChildren().addAll(forwardButton, backButton);
     }
 
-    private void moveShapeForward() {
+    private void moveShapeBackward() {
     }
 
-    private void moveShapeBackward() {
+    private void moveShapeForward() {
     }
 
 }
