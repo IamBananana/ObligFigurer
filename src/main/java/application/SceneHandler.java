@@ -56,6 +56,7 @@ public class SceneHandler {
         drawerPane.setPrefWidth(scene.getWidth() * 3 / 4);
 
         mouseHandler = new MouseEventHandler(drawerPane, this);
+
     }
 
     private VBox getVBucks() {

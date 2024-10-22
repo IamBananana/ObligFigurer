@@ -37,7 +37,6 @@ public class MouseEventHandler {
         startX = event.getX();
         startY = event.getY();
 
-
         switch (sceneHandler.selctedType) {
             case RECTANGLE:
                 currentShape = new myRectangle(startX, startY, 0, 0);
@@ -52,7 +51,6 @@ public class MouseEventHandler {
         }
 
         if (currentShape != null) {
-            drawablePane.getChildren().add(currentShape);  //legger til shapen, kan adde her til datastruktur?
             sceneHandler.addShape((Shapes) currentShape);
         }
     }
