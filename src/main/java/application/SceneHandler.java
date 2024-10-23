@@ -16,7 +16,7 @@ import java.util.LinkedList;
 public class SceneHandler {
     private Scene scene;
     private BorderPane rootPane;
-    private Pane drawerPane;
+    public Pane drawerPane;
     private MouseEventHandler mouseHandler;
     public HandlerHandler handlerHandler = new HandlerHandler();
     private VBox shapeInfoPanel;
@@ -57,7 +57,7 @@ public class SceneHandler {
 
         drawerPane.setPrefWidth(scene.getWidth() * 3 / 4);
 
-        mouseHandler = new MouseEventHandler(drawerPane, this);
+        mouseHandler = new MouseEventHandler(this);
 
     }
 

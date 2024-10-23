@@ -47,23 +47,23 @@ public class myLine extends Line implements Shapes {
     @Override
     public double getArea(){
         return this.getStrokeWidth()*this.length;
-    };
+    }
 
     @Override
     public double getCircumference(){
         return this.getStrokeWidth()+this.length;
-    };
+    }
 
     @Override
     public String toString(){
         return getShape() + ", startX: " + getStartX() + ", startY: " + getStartY() + ", endX: " + getEndX() + ", endY: " + getEndY() + ", lenght: " +
                 getLength() + ", width: " + getStrokeWidth();
-    };
+    }
 
     @Override
     public String getShape(){
         return "Line";
-    };
+    }
 
     //Endrer bare på verdier til objektet
     @Override
@@ -73,10 +73,10 @@ public class myLine extends Line implements Shapes {
         this.setStartY(startY);
         this.setEndX(endX);
         this.setEndY(endY);
-    };
+    }
 
     @Override
     public Node getShapeNode(){
         return line;
-    };
+    }
 }

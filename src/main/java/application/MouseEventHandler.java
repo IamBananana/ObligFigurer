@@ -14,9 +14,12 @@ public class MouseEventHandler {
     private Shape selectedShape = null;
     double endX, endY;
 
-    public MouseEventHandler(Pane drawablePane, SceneHandler sceneHandler) {
-        this.drawablePane = drawablePane;
+    /**
+     * @param sceneHandler Instansierer sceneHandler slik at vi får en kobling
+     */
+    public MouseEventHandler(SceneHandler sceneHandler) {
         setSceneHandler(sceneHandler);
+        this.drawablePane = sceneHandler.drawerPane;
         addMouseListeners();
     }
 
@@ -24,6 +27,9 @@ public class MouseEventHandler {
         this.sceneHandler = sceneHandler;
     }
 
+    /**
+     * Legger til mouseListeners på drawablePane
+     */
     private void addMouseListeners() {
         drawablePane.setOnMousePressed(this::handleMousePressed);
         drawablePane.setOnMouseDragged(this::handleMouseDragged);
@@ -135,11 +141,9 @@ public class MouseEventHandler {
     }
 
     /**
-     * Returner shape objektet som hører til x,y kordinatene.
-     * Returnerer null hvis det ikke eksisterer på den posisjonen.
      * @param x
-     * @param y
-     * @return
+     * @param y Tar inn x,y kordinater og looper gjennom hele drawablePane og sjekker om en shape finnes på kordinatene.
+     * @return Returnerer shapen hvis den ble funnet og returnerer null hvis den ikke finnes.
      */
     private Shape findShapeAt(double x, double y) {
         for (Node node : drawablePane.getChildren()) {
