@@ -12,6 +12,7 @@ public class MouseEventHandler {
     private SceneHandler sceneHandler;
     private Shape currentShape;  // Current shape being drawn
     private Shape selectedShape = null;
+    double endX, endY;
 
     public MouseEventHandler(Pane drawablePane, SceneHandler sceneHandler) {
         this.drawablePane = drawablePane;
@@ -35,17 +36,30 @@ public class MouseEventHandler {
     private void handleMousePressed(MouseEvent event) {
         startX = event.getX();
         startY = event.getY();
+        endX = startX;
+        endY = startY;
 
+        //Gjorde endX og endY global
+        //Da starter vi ikke i hjørnet hele tiden
+
+        //Slipper error og får det bare opp under keyPress
+        if(sceneHandler.selectedType == null){
+            System.out.println("Ingen type valgt.");
+            return;
+        }
 
         switch (sceneHandler.selectedType) {
             case RECTANGLE:
-                currentShape = new myRectangle(startX, startY, 0, 0);
+                currentShape = new myRectangle(startX, startY, endX, endY);
                 break;
             case CIRCLE:
                 currentShape = new myCircle(startX, startY, 0);
                 break;
             case ELLIPSE:
-                currentShape = new myEllipse(startX, startY, 0, 0);
+                currentShape = new myEllipse(startX, startY, endX, endY);
+                break;
+            case LINE:
+                currentShape = new myLine(startX, startY, endX, endY);
                 break;
             case TEXT:
                 TextInputDialog dialog = new TextInputDialog("Your Text Here");
@@ -59,7 +73,6 @@ public class MouseEventHandler {
                     sceneHandler.addShape((Shapes) currentShape); // Add shape to the handler
                 });
                 break;
-
         }
 
         if (currentShape != null) {
@@ -68,9 +81,10 @@ public class MouseEventHandler {
     }
 
     private void handleMouseDragged(MouseEvent event) {
-        double endX = event.getX();
-        double endY = event.getY();
+        endX = event.getX();
+        endY = event.getY();
 
+        if(sceneHandler.selectedType == null) return;
         switch (sceneHandler.selectedType) {
             case RECTANGLE:
                 ((myRectangle) currentShape).createShape(startX, startY, endX, endY);
@@ -80,8 +94,9 @@ public class MouseEventHandler {
                 break;
             case ELLIPSE:
                 ((myEllipse) currentShape).createShape(startX, startY, endX, endY);
+            case LINE:
+                ((myLine) currentShape).createShape(startX, startY, endX, endY);
         }
-
     }
 
     private void handleMouseReleased(MouseEvent event) {
