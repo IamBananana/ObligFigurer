@@ -34,9 +34,7 @@ public class MouseEventHandler {
         drawablePane.setOnMousePressed(this::handleMousePressed);
         drawablePane.setOnMouseDragged(this::handleMouseDragged);
         drawablePane.setOnMouseReleased(this::handleMouseReleased);
-        // Double-click for selecting a shape
         drawablePane.setOnMouseClicked(this::handleMouseClick);
-        //kanskje en double-click and hold for resizing av en allerede lagd shape? idk
     }
 
     /**
@@ -49,9 +47,6 @@ public class MouseEventHandler {
         startY = event.getY();
         endX = startX;
         endY = startY;
-
-        //Gjorde endX og endY global
-        //Da starter vi ikke i hjørnet hele tiden
 
         //Slipper error og får det bare opp under keyPress
         if(sceneHandler.selectedType == null){
@@ -149,13 +144,10 @@ public class MouseEventHandler {
      * Når man høyreklikker på selected element så kan man bevege det rundt med høyreklikk.
      * Går bare hvis man bruker selector.
      * @param event
+     *
+     * Denne metoden funker ikke helt som den skal, men hadd ikke tid til å fikse det.
      */
     private void handleMouseRightClick(MouseEvent event){
-
-        System.out.println("Cursor:"+ (drawablePane.getCursor() == Cursor.CROSSHAIR));
-        System.out.println("Mouse:"+event.isSecondaryButtonDown());
-        System.out.println("Is selected: " + (selectedShape != null));
-
         if(drawablePane.getCursor() == Cursor.CROSSHAIR && event.isSecondaryButtonDown() && selectedShape != null){
             System.out.println(startX+":"+startY);
             Shapes shape = (Shapes) selectedShape;

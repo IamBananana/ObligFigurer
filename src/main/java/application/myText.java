@@ -11,29 +11,13 @@ public class myText extends Text implements Shapes {
 
     public myText(double x, double y, String content) {
         super(content);
-        setStartX(x);
-        setStartY(y);
+        this.x = x;
+        this.y = y;
 
         setX(x);
         setY(y);
         setFont(new Font("Arial", 20));
         setFill(Color.BLACK);
-    }
-
-    public void setStartX(double startX){
-        this.x = startX;
-    }
-
-    public void setStartY(double startY){
-        this.y = startY;
-    }
-
-    public void setEndX(double endX){
-        this.endX =  endX;
-    }
-
-    public void setEndY(double endY){
-        this.endY =  endY;
     }
 
     @Override
@@ -59,5 +43,7 @@ public class myText extends Text implements Shapes {
 
     @Override
     public void setShapeAt(double x ,double y){
+        this.setX(x);
+        this.setY(y);
     }
 }
