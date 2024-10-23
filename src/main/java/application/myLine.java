@@ -35,13 +35,13 @@ public class myLine extends Line implements Shapes {
     }
 
     @Override
-    public double getX(){
+    public double getX() {
         return getStartX();
     }
 
     @Override
-    public double getY(){
-        return getStartX();
+    public double getY() {
+        return getStartY();
     }
 
     @Override
@@ -73,5 +73,16 @@ public class myLine extends Line implements Shapes {
         this.setStartY(startY);
         this.setEndX(endX);
         this.setEndY(endY);
+    }
+
+    @Override
+    public void setShapeAt(double x ,double y){
+        double difX = this.getEndX() - this.getStartX();
+        double difY = this.getEndY() - this.getStartY();
+
+        this.setStartX(x);
+        this.setStartY(y);
+        this.setEndX(x+difX);
+        this.setEndY(y+difY);
     }
 }

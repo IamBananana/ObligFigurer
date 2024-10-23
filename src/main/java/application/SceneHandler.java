@@ -16,7 +16,7 @@ import java.util.LinkedList;
 public class SceneHandler {
     private Scene scene;
     private BorderPane rootPane;
-    public Pane drawerPane;
+    public Pane drawablePane;
     private MouseEventHandler mouseHandler;
     public HandlerHandler handlerHandler = new HandlerHandler();
     private VBox shapeInfoPanel;
@@ -49,17 +49,17 @@ public class SceneHandler {
         shapeInfoPanel = new VBox(10);
         shapeInfoPanel.setStyle("-fx-background-color: #f0f0f0; -fx-padding: 10px;");
 
-        rootPane.setCenter(drawerPane);
+        rootPane.setCenter(drawablePane);
         rootPane.setRight(shapeInfoPanel);
         
-        drawerPane = new Pane();
-        drawerPane.setStyle("-fx-background-color: #ffffff;");
+        drawablePane = new Pane();
+        drawablePane.setStyle("-fx-background-color: #ffffff;");
 
 
-        rootPane.setCenter(drawerPane);
+        rootPane.setCenter(drawablePane);
         rootPane.setLeft(getVBucks());
 
-        drawerPane.setPrefWidth(scene.getWidth() * 3 / 4);
+        drawablePane.setPrefWidth(scene.getWidth() * 3 / 4);
 
         mouseHandler = new MouseEventHandler(this);
 
@@ -101,34 +101,31 @@ public class SceneHandler {
 
         selector.setOnAction(e -> {
             selectedType = null;
-            drawerPane.setCursor(Cursor.CROSSHAIR); });
-        selector.setOnAction(e -> {
-            selectedType = null;
-            drawerPane.setCursor(Cursor.CROSSHAIR); });
+            drawablePane.setCursor(Cursor.CROSSHAIR); });
         line.setOnAction(e -> {
             selectedType = type.LINE;
-            drawerPane.setCursor(Cursor.DEFAULT); });
+            drawablePane.setCursor(Cursor.DEFAULT); });
         arc.setOnAction(e -> {
             selectedType = type.ARC;
-            drawerPane.setCursor(Cursor.DEFAULT); });
+            drawablePane.setCursor(Cursor.DEFAULT); });
         polyline.setOnAction(e -> {
             selectedType = type.POLYLINE;
-            drawerPane.setCursor(Cursor.DEFAULT); });
+            drawablePane.setCursor(Cursor.DEFAULT); });
         rectangle.setOnAction(e -> {
             selectedType = type.RECTANGLE;
-            drawerPane.setCursor(Cursor.DEFAULT); });
+            drawablePane.setCursor(Cursor.DEFAULT); });
         circle.setOnAction(e -> {
             selectedType = type.CIRCLE;
-            drawerPane.setCursor(Cursor.DEFAULT); });
+            drawablePane.setCursor(Cursor.DEFAULT); });
         ellipse.setOnAction(e -> {
             selectedType = type.ELLIPSE;
-            drawerPane.setCursor(Cursor.DEFAULT); });
+            drawablePane.setCursor(Cursor.DEFAULT); });
         polygon.setOnAction(e -> {
             selectedType = type.POLYGON;
-            drawerPane.setCursor(Cursor.DEFAULT); });
+            drawablePane.setCursor(Cursor.DEFAULT); });
         text.setOnAction(e -> {
             selectedType = type.TEXT;
-            drawerPane.setCursor(Cursor.DEFAULT); });
+            drawablePane.setCursor(Cursor.DEFAULT); });
 
         vBucks.getChildren().addAll(selector, line, arc, polyline, rectangle, circle, ellipse, polygon, text);
 
@@ -216,11 +213,11 @@ public class SceneHandler {
         }
     }
 
-    private void refreshPane() {
+    public void refreshPane() {
 
-        drawerPane.getChildren().clear();
+        drawablePane.getChildren().clear();
         for (Shapes shape : shapesList) {
-            drawerPane.getChildren().add((Node) shape);
+            drawablePane.getChildren().add((Node) shape);
         }
         updateShapeInfoPanel();  // Update position info
     }
@@ -239,6 +236,7 @@ public class SceneHandler {
     }
     public void addShape(Shapes shape) {
 
+
         boolean isDuplicate = false;
 
         for (Shapes existingShape : shapesList) {
@@ -253,7 +251,7 @@ public class SceneHandler {
 
         if (!isDuplicate) {
             shapesList.add(shape);
-            drawerPane.getChildren().add((Node) shape);
+            drawablePane.getChildren().add((Node) shape);
             updateShapeInfoPanel();
             System.out.println("Shape added: " + shape);
         } else {

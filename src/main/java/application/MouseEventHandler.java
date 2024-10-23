@@ -1,5 +1,6 @@
 package application;
 
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.MouseEvent;
@@ -7,19 +8,18 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Shape;
 
 public class MouseEventHandler {
-    double startX, startY;
+    double startX, startY, endX, endY;
     private final Pane drawablePane;
     private SceneHandler sceneHandler;
     private Shape currentShape;  // Current shape being drawn
     private Shape selectedShape = null;
-    double endX, endY;
 
     /**
      * @param sceneHandler Instansierer sceneHandler slik at vi får en kobling
      */
     public MouseEventHandler(SceneHandler sceneHandler) {
         setSceneHandler(sceneHandler);
-        this.drawablePane = sceneHandler.drawerPane;
+        this.drawablePane = sceneHandler.drawablePane;
         addMouseListeners();
     }
 
@@ -55,19 +55,19 @@ public class MouseEventHandler {
 
         //Slipper error og får det bare opp under keyPress
         if(sceneHandler.selectedType == null){
-            System.out.println("Ingen type valgt.");
+            if(drawablePane.getCursor() == Cursor.DEFAULT) System.out.println("Ingen type valgt.");
             return;
         }
 
         switch (sceneHandler.selectedType) {
             case RECTANGLE:
-                currentShape = new myRectangle(startX, startY, endX, endY);
+                currentShape = new myRectangle(startX, startY, 0, 0);
                 break;
             case CIRCLE:
                 currentShape = new myCircle(startX, startY, 0);
                 break;
             case ELLIPSE:
-                currentShape = new myEllipse(startX, startY, endX, endY);
+                currentShape = new myEllipse(startX, startY, 0, 0);
                 break;
             case LINE:
                 currentShape = new myLine(startX, startY, endX, endY);
@@ -100,7 +100,11 @@ public class MouseEventHandler {
         endX = event.getX();
         endY = event.getY();
 
-        if(sceneHandler.selectedType == null) return;
+        if(sceneHandler.selectedType == null) {
+            handleMouseRightClick(event);
+
+            return;
+        }
         switch (sceneHandler.selectedType) {
             case RECTANGLE:
                 ((myRectangle) currentShape).createShape(startX, startY, endX, endY);
@@ -137,6 +141,34 @@ public class MouseEventHandler {
                 selectedShape = (Shape) clickedShape;
                 sceneHandler.showShapeDetails(selectedShape);  // Display info about the selected shape
             }
+        }
+    }
+
+    /**
+     * Håndterer høyreklikk events
+     * Når man høyreklikker på selected element så kan man bevege det rundt med høyreklikk.
+     * Går bare hvis man bruker selector.
+     * @param event
+     */
+    private void handleMouseRightClick(MouseEvent event){
+
+        System.out.println("Cursor:"+ (drawablePane.getCursor() == Cursor.CROSSHAIR));
+        System.out.println("Mouse:"+event.isSecondaryButtonDown());
+        System.out.println("Is selected: " + (selectedShape != null));
+
+        if(drawablePane.getCursor() == Cursor.CROSSHAIR && event.isSecondaryButtonDown() && selectedShape != null){
+            System.out.println("AAAAAAA");
+            Shapes shape = (Shapes) selectedShape;
+
+            double difX = event.getX() - startX;
+            double difY = event.getY() - startY;
+            //shape.createShape(shape.getStartX()+difX, shape.getStartY()+difY, shape.getEndX(), shape.getEndY());
+
+            shape.setShapeAt(difX, difY);
+
+            System.out.println(shape.toString());
+
+            sceneHandler.refreshPane();
         }
     }
 

@@ -1,6 +1,5 @@
 package application;
 
-import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -8,16 +7,33 @@ import javafx.scene.text.Text;
 public class myText extends Text implements Shapes {
     private double x, y;
     private Text text;
+    private double endX, endY;
 
     public myText(double x, double y, String content) {
         super(content);
-        this.x = x;
-        this.y = y;
+        setStartX(x);
+        setStartY(y);
 
         setX(x);
         setY(y);
         setFont(new Font("Arial", 20));
         setFill(Color.BLACK);
+    }
+
+    public void setStartX(double startX){
+        this.x = startX;
+    }
+
+    public void setStartY(double startY){
+        this.y = startY;
+    }
+
+    public void setEndX(double endX){
+        this.endX =  endX;
+    }
+
+    public void setEndY(double endY){
+        this.endY =  endY;
     }
 
     @Override
@@ -39,5 +55,9 @@ public class myText extends Text implements Shapes {
     @Override
     public void createShape(double startX, double startY, double endX, double endY) {
 
+    }
+
+    @Override
+    public void setShapeAt(double x ,double y){
     }
 }

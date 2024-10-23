@@ -42,4 +42,6 @@ public interface Shapes {
      */
     void createShape(double startX, double startY, double endX, double endY);
 
+    void setShapeAt(double x, double y);
+
 }

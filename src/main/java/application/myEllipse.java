@@ -1,16 +1,24 @@
 package application;
 
-import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 
 public class myEllipse extends Ellipse implements Shapes {
     private Ellipse ellipse;
+    private double endX, endY;
 
     public myEllipse(double centerX, double centerY, double radiusX, double radiusY) {
         super(centerX, centerY, radiusX, radiusY);
         setFill(Color.TRANSPARENT);
         setStroke(Color.BLACK);
+    }
+
+    public void setEndX(double endX){
+        this.endX =  endX;
+    }
+
+    public void setEndY(double endY){
+        this.endY =  endY;
     }
 
     @Override
@@ -44,5 +52,9 @@ public class myEllipse extends Ellipse implements Shapes {
         this.setCenterY((startY + endY) / 2);
         this.setRadiusX(Math.abs(endX - startX) / 2);
         this.setRadiusY(Math.abs(endY - startY) / 2);
+    }
+
+    @Override
+    public void setShapeAt(double x ,double y){
     }
 }

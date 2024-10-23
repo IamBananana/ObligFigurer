@@ -1,6 +1,5 @@
 package application;
 
-import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -8,6 +7,7 @@ import javafx.scene.shape.Circle;
 public class myCircle extends Circle implements Shapes {
     private Color color;
     private Circle circle;
+    private double endX, endY;
 
     public myCircle(double x, double y, double radius) {
         super(x, y, radius);
@@ -25,6 +25,14 @@ public class myCircle extends Circle implements Shapes {
 
     public Color setColor(Color color) {
         return this.color = color;
+    }
+
+    public void setEndX(double endX){
+        this.endX =  endX;
+    }
+
+    public void setEndY(double endY){
+        this.endY =  endY;
     }
 
     @Override
@@ -64,5 +72,9 @@ public class myCircle extends Circle implements Shapes {
         this.setCenterX((startX + endX) / 2);
         this.setCenterY((startY + endY) / 2);
         this.setRadius(radius);
+    }
+
+    @Override
+    public void setShapeAt(double x ,double y){
     }
 }
