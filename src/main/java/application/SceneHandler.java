@@ -40,6 +40,7 @@ public class SceneHandler {
      * Constructor for sceneHandler
      * sceneHandler har som jobb i å håndtere og konstruere alt på scenen
      * Bygger opp scenen og plasserer
+     * Oppretter også en mouseHandler som tar for seg alle mouse events til scenen.
      * @param scene
      */
     public SceneHandler(Scene scene) {
@@ -132,6 +133,10 @@ public class SceneHandler {
         return vBucks;
     }
 
+    /**
+     * @param shape Tar inn en shape og oppretter et side panel som viser detaljer til shapen og
+     *              gjør det mulig for brukeren til å endre på enkelte ting til shapen. (color/strokeColor)
+     */
     public void showShapeDetails(Shape shape) {
         selectedShape = shape;
         shapeInfoPanel.getChildren().clear();  // Clear previous info
@@ -169,6 +174,10 @@ public class SceneHandler {
         createMoveButtons();
     }
 
+    /**
+     * @param shape
+     * @return Returnerer areal til shapen basert på parameteren.
+     */
     private double getArea(Shape shape) {
         if (shape instanceof Shapes) {
             return ((Shapes) shape).getArea();
@@ -176,6 +185,10 @@ public class SceneHandler {
         return 0;
     }
 
+    /**
+     * @param shape
+     * @return Returnerer omkrets til shapen basert på parameteren.
+     */
     private double getCircumference(Shape shape) {
         if (shape instanceof Shapes) {
             return ((Shapes) shape).getCircumference();
@@ -183,6 +196,9 @@ public class SceneHandler {
         return 0;
     }
 
+    /**
+     * Oppretter knapper til å bevege shape framover eller bakover på panelet.
+     */
     private void createMoveButtons() {
         Button forwardButton = new Button("Move Forward");
         Button backButton = new Button("Move Backward");
@@ -193,6 +209,9 @@ public class SceneHandler {
         shapeInfoPanel.getChildren().addAll(forwardButton, backButton);
     }
 
+    /**
+     * Beveger shape en plass framover i LinkedListen.
+     */
     private void moveShapeForward() {
         int index = shapesList.indexOf(selectedShape);
         if (index >= 0 && index < shapesList.size() - 1) {
@@ -203,6 +222,9 @@ public class SceneHandler {
         }
     }
 
+    /**
+     * Beveger shape en plass bakover i LinkedListen.
+     */
     private void moveShapeBackward() {
         int index = shapesList.indexOf(selectedShape);
         if (index > 0) {
@@ -213,6 +235,9 @@ public class SceneHandler {
         }
     }
 
+    /**
+     * Refresher panelet ved å cleare panelet og deretter loope gjennom LinkedListen for å legge dem tilbake.
+     */
     public void refreshPane() {
 
         drawablePane.getChildren().clear();
@@ -222,6 +247,9 @@ public class SceneHandler {
         updateShapeInfoPanel();  // Update position info
     }
 
+    /**
+     * Oppdaterer info panelet med ny oppdatert informasjon.
+     */
     private void updateShapeInfoPanel() {
         if (selectedShape != null) {
             int totalShapes = shapesList.size();
@@ -234,6 +262,10 @@ public class SceneHandler {
             }
         }
     }
+
+    /**
+     * @param shape Legger til shape til panelet og shapeList (LinkedList)
+     */
     public void addShape(Shapes shape) {
 
 

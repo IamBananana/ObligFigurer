@@ -9,6 +9,11 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    /**
+     * Oppretter scene og sender det videre til sceneHandler som hånterer reseten av hva som skjer på scenen.
+     * Viser stage
+     * @param stage
+     */
     @Override
     public void start(Stage stage) {
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();

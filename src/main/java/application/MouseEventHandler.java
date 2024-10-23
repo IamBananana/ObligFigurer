@@ -157,12 +157,11 @@ public class MouseEventHandler {
         System.out.println("Is selected: " + (selectedShape != null));
 
         if(drawablePane.getCursor() == Cursor.CROSSHAIR && event.isSecondaryButtonDown() && selectedShape != null){
-            System.out.println("AAAAAAA");
+            System.out.println(startX+":"+startY);
             Shapes shape = (Shapes) selectedShape;
 
             double difX = event.getX() - startX;
             double difY = event.getY() - startY;
-            //shape.createShape(shape.getStartX()+difX, shape.getStartY()+difY, shape.getEndX(), shape.getEndY());
 
             shape.setShapeAt(difX, difY);
 
