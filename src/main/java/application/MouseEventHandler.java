@@ -33,6 +33,11 @@ public class MouseEventHandler {
         //kanskje en double-click and hold for resizing av en allerede lagd shape? idk
     }
 
+    /**
+     * Handler mousePress events fra drawablePane.
+     * Lager start posisjon for ny shape basert på sceneHandler.selectedType
+     * @param event
+     */
     private void handleMousePressed(MouseEvent event) {
         startX = event.getX();
         startY = event.getY();
@@ -80,6 +85,11 @@ public class MouseEventHandler {
         }
     }
 
+    /**
+     * Handler mouseDrag events fra drawablePane.
+     * Lager/oppdaterer posisjon og størrelse på element basert på hvor brukeren drar musen.
+     * @param event
+     */
     private void handleMouseDragged(MouseEvent event) {
         endX = event.getX();
         endY = event.getY();
@@ -99,11 +109,21 @@ public class MouseEventHandler {
         }
     }
 
+    /**
+     * Handler mouseRelease events fra drawablePane.
+     * Reseter currentShape tilbake til null når bruker releaser musen.
+     * @param event
+     */
     private void handleMouseReleased(MouseEvent event) {
         // Resetter current shape
         currentShape = null;
     }
 
+    /**
+     * Handler dobbel mouseClick events fra drawablePane.
+     * Hvis bruker dobbeltklikker et element så åpner den sidemeny som viser detaljer om elementet.
+     * @param event
+     */
     private void handleMouseClick(MouseEvent event) {
         if (event.getClickCount() == 2) {  // Double-click
             Node clickedShape = findShapeAt(event.getX(), event.getY());
@@ -114,6 +134,13 @@ public class MouseEventHandler {
         }
     }
 
+    /**
+     * Returner shape objektet som hører til x,y kordinatene.
+     * Returnerer null hvis det ikke eksisterer på den posisjonen.
+     * @param x
+     * @param y
+     * @return
+     */
     private Shape findShapeAt(double x, double y) {
         for (Node node : drawablePane.getChildren()) {
             if (node instanceof Shape) {
