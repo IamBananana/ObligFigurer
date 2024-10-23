@@ -40,9 +40,4 @@ public class myText extends Text implements Shapes {
     public void createShape(double startX, double startY, double endX, double endY) {
 
     }
-
-    @Override
-    public Node getShapeNode() {
-        return text;
-    }
 }

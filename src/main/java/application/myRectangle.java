@@ -47,7 +47,7 @@ public class myRectangle extends Rectangle implements Shapes {
 
     @Override
     public String toString() {
-        return getShape() + ", x: " + getX() + ", y: " + getY() + ", height: " + getHeight() + ", width: " + getWidth();
+        return getShape() + ", x: " + getX() + ", y: " + getY() + ", height: " + getHeight() + ", width: " + getWidth() + ", color: " + getColor();
     }
 
     @Override
@@ -56,10 +56,5 @@ public class myRectangle extends Rectangle implements Shapes {
         this.setY(Math.min(startY, endY));
         this.setWidth(Math.abs(endX - startX));
         this.setHeight(Math.abs(endY - startY));
-    }
-
-    @Override
-    public Node getShapeNode() {
-        return rectangle;
     }
 }

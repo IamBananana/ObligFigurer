@@ -52,16 +52,10 @@ public class myCircle extends Circle implements Shapes {
         return "Circle";
     }
 
-
-    @Override
-    public Node getShapeNode() {
-        return circle;
-    }
-
     @Override
     public String toString() {
         return getShape() + ", x: " + getCenterX() + ", y: " + getCenterY() +
-                ", radius: " + getRadius() + ", area: " + getArea() + ", circumference: " + getCircumference();
+                ", radius: " + getRadius() + ", area: " + getArea() + ", circumference: " + getCircumference() + ", color: " + getColor();
     }
 
     @Override

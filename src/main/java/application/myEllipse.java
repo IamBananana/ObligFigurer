@@ -45,9 +45,4 @@ public class myEllipse extends Ellipse implements Shapes {
         this.setRadiusX(Math.abs(endX - startX) / 2);
         this.setRadiusY(Math.abs(endY - startY) / 2);
     }
-
-    @Override
-    public Node getShapeNode() {
-        return ellipse;
-    }
 }
