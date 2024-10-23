@@ -36,8 +36,12 @@ public class SceneHandler {
 
     type selectedType;
 
-    public SceneHandler() {}
-
+    /**
+     * Constructor for sceneHandler
+     * sceneHandler har som jobb i å håndtere og konstruere alt på scenen
+     * Bygger opp scenen og plasserer
+     * @param scene
+     */
     public SceneHandler(Scene scene) {
         this.scene = scene;
         this.rootPane = (BorderPane) scene.getRoot();
@@ -61,6 +65,10 @@ public class SceneHandler {
 
     }
 
+    /**
+     * Lager en vertikal box som inneholder radioknapper for valg av shapes brukeren kan velge.
+     * @return returnerer VBoxen med innhold
+     */
     private VBox getVBucks() {
         VBox vBucks = new VBox(10);
         vBucks.setPrefWidth(scene.getWidth() / 5);
