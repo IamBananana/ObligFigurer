@@ -56,7 +56,7 @@ public class myEllipse extends Ellipse implements Shapes {
 
     @Override
     public void setShapeAt(double x ,double y){
-        this.setCenterX(x);
-        this.setCenterY(x);
+        this.setCenterX(getX()+x);
+        this.setCenterY(getY()+y);
     }
 }

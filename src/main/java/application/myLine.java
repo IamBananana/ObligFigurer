@@ -80,8 +80,8 @@ public class myLine extends Line implements Shapes {
         double difX = this.getEndX() - this.getStartX();
         double difY = this.getEndY() - this.getStartY();
 
-        this.setStartX(x);
-        this.setStartY(y);
+        this.setStartX(getX()+x);
+        this.setStartY(getY()+y);
         this.setEndX(x+difX);
         this.setEndY(y+difY);
     }

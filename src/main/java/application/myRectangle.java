@@ -68,7 +68,7 @@ public class myRectangle extends Rectangle implements Shapes {
 
     @Override
     public void setShapeAt(double x ,double y){
-        this.setX(x);
-        this.setY(y);
+        this.setX(getX()+x);
+        this.setY(getY()+y);
     }
 }

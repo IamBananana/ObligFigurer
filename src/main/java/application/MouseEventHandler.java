@@ -109,8 +109,10 @@ public class MouseEventHandler {
                 break;
             case ELLIPSE:
                 ((myEllipse) currentShape).createShape(startX, startY, endX, endY);
+                break;
             case LINE:
                 ((myLine) currentShape).createShape(startX, startY, endX, endY);
+                break;
         }
     }
 
@@ -149,15 +151,15 @@ public class MouseEventHandler {
      */
     private void handleMouseRightClick(MouseEvent event){
         if(drawablePane.getCursor() == Cursor.CROSSHAIR && event.isSecondaryButtonDown() && selectedShape != null){
-            System.out.println(startX+":"+startY);
             Shapes shape = (Shapes) selectedShape;
 
             double difX = event.getX() - startX;
             double difY = event.getY() - startY;
 
-            shape.setShapeAt(difX, difY);
+            startX = event.getX();
+            startY = event.getY();
 
-            System.out.println(shape.toString());
+            shape.setShapeAt(difX, difY);
 
             sceneHandler.refreshPane();
         }
