@@ -4,13 +4,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class myRectangle extends Rectangle implements Shapes {
-    private Color color;
-    private Rectangle rectangle;
     private  double endX, endY;
 
     public myRectangle(double x, double y, double height, double width, Color color) {
         super(x, y, width, height);
-        ColorUtility.setColor(this, color);
+        setFill(color);
     }
 
     public myRectangle(double x, double y, double height, double width) {
@@ -18,16 +16,6 @@ public class myRectangle extends Rectangle implements Shapes {
     }
 
     private myRectangle() {
-    }
-
-    ;
-
-    public Color getColor() {
-        return color;
-    }
-
-    public Color setColor(Color color) {
-        return this.color = color;
     }
 
     public void setEndX(double endX){
@@ -55,7 +43,7 @@ public class myRectangle extends Rectangle implements Shapes {
 
     @Override
     public String toString() {
-        return getShape() + ", x: " + getX() + ", y: " + getY() + ", height: " + getHeight() + ", width: " + getWidth() + ", color: " + getColor();
+        return getShape() + ", x: " + getX() + ", y: " + getY() + ", height: " + getHeight() + ", width: " + getWidth() + ", color: " + getFill();
     }
 
     @Override

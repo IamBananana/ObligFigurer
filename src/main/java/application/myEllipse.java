@@ -4,7 +4,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 
 public class myEllipse extends Ellipse implements Shapes {
-    private Ellipse ellipse;
     private double endX, endY;
 
     public myEllipse(double centerX, double centerY, double radiusX, double radiusY) {

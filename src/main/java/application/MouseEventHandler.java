@@ -5,6 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Shape;
 
 public class MouseEventHandler {
@@ -49,10 +50,13 @@ public class MouseEventHandler {
         endY = startY;
 
         //Slipper error og får det bare opp under keyPress
-        if(sceneHandler.selectedType == null){
+        if(sceneHandler.selectedType == null ){
             if(drawablePane.getCursor() == Cursor.DEFAULT) System.out.println("Ingen type valgt.");
             return;
         }
+
+        //La brukeren bare dra ut figur hvis de bruker left click
+        if(!event.isPrimaryButtonDown()) return;
 
         switch (sceneHandler.selectedType) {
             case RECTANGLE:
@@ -66,6 +70,11 @@ public class MouseEventHandler {
                 break;
             case LINE:
                 currentShape = new myLine(startX, startY, endX, endY);
+                break;
+            case ARC:
+                myArc arc = new myArc(startX, startY, 0, 0, 0, Math.PI);
+                arc.setType(ArcType.OPEN);
+                currentShape = arc;
                 break;
             case TEXT:
                 TextInputDialog dialog = new TextInputDialog("Your Text Here");
@@ -97,9 +106,12 @@ public class MouseEventHandler {
 
         if(sceneHandler.selectedType == null) {
             handleMouseRightClick(event);
-
             return;
         }
+
+        //La brukeren bare dra ut figur hvis de bruker left click
+        if(!event.isPrimaryButtonDown()) return;
+
         switch (sceneHandler.selectedType) {
             case RECTANGLE:
                 ((myRectangle) currentShape).createShape(startX, startY, endX, endY);
@@ -112,6 +124,9 @@ public class MouseEventHandler {
                 break;
             case LINE:
                 ((myLine) currentShape).createShape(startX, startY, endX, endY);
+                break;
+            case ARC:
+                ((myArc) currentShape).createShape(startX, startY, endX, endY);
                 break;
         }
     }
@@ -146,8 +161,6 @@ public class MouseEventHandler {
      * Når man høyreklikker på selected element så kan man bevege det rundt med høyreklikk.
      * Går bare hvis man bruker selector.
      * @param event
-     *
-     * Denne metoden funker ikke helt som den skal, men hadd ikke tid til å fikse det.
      */
     private void handleMouseRightClick(MouseEvent event){
         if(drawablePane.getCursor() == Cursor.CROSSHAIR && event.isSecondaryButtonDown() && selectedShape != null){

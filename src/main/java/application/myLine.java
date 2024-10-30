@@ -5,9 +5,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
 public class myLine extends Line implements Shapes {
-    private Color color;
     private double length;
-    private Line line;
 
     public myLine(double startX, double startY, double endX, double endY){
         super(startX, startY, endX, endY);
@@ -15,11 +13,7 @@ public class myLine extends Line implements Shapes {
 
     public myLine(double startX, double startY, double endX, double endY, Color color){
         super(startX, startY, endX, endY);
-        setColor(color);
-    }
-
-    public void setColor(Color color){
-        this.color = color;
+        setFill(color);
     }
 
     private void setLenght(double lenght){
@@ -28,10 +22,6 @@ public class myLine extends Line implements Shapes {
 
     public double getLength(){
         return this.length;
-    }
-
-    public Color getColor(){
-        return this.color;
     }
 
     @Override
@@ -57,7 +47,7 @@ public class myLine extends Line implements Shapes {
     @Override
     public String toString(){
         return getShape() + ", startX: " + getStartX() + ", startY: " + getStartY() + ", endX: " + getEndX() + ", endY: " + getEndY() + ", lenght: " +
-                getLength() + ", width: " + getStrokeWidth() + ", color: " + getColor();
+                getLength() + ", width: " + getStrokeWidth() + ", color: " + getFill();
     }
 
     @Override

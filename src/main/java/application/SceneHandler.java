@@ -285,7 +285,7 @@ public class SceneHandler {
             shapesList.add(shape);
             drawablePane.getChildren().add((Node) shape);
             updateShapeInfoPanel();
-            System.out.println("Shape added: " + shape);
+            System.out.println("Shape added: " + shape +"\n" + shape.toString());
         } else {
             System.out.println("Duplicate shape detected, not adding to the list: " + shape);
         }
